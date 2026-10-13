@@ -1,0 +1,13 @@
+HTTP/1.1 500 Internal Server Error
+Server: Microsoft-IIS/10.0
+Content-Type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <s:Fault>
+      <faultcode>s:Client</faultcode>
+      <faultstring>Object reference not set to an instance of an object.</faultstring>
+    </s:Fault>
+  </s:Body>
+</s:Envelope>

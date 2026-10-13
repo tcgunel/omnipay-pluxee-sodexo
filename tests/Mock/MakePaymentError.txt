@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+Server: Microsoft-IIS/10.0
+Content-Type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <MakePaymentResponse xmlns="http://www.sodexopayment.com/PaymentService/2019/04">
+      <MakePaymentResult xmlns:a="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model.Payment" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <ResultCode xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">12</ResultCode>
+        <ResultMessage xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">Kart bakiyesi yetersiz</ResultMessage>
+        <a:AvailablePoint i:nil="true"/>
+        <a:BatchNo>0</a:BatchNo>
+        <a:HostBalance i:nil="true"/>
+        <a:LylBankPoint i:nil="true"/>
+        <a:LylMrcPoint i:nil="true"/>
+        <a:Otc i:nil="true"/>
+        <a:Rrn i:nil="true"/>
+        <a:ServiceId i:nil="true"/>
+        <a:TransactionEncId i:nil="true"/>
+        <a:UserInvoice i:nil="true"/>
+      </MakePaymentResult>
+    </MakePaymentResponse>
+  </s:Body>
+</s:Envelope>

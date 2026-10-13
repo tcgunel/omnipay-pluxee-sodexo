@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Server: Microsoft-IIS/10.0
+Content-Type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <SetUpMerchantVirtualPosResponse xmlns="http://www.sodexopayment.com/LoginService/2019/04">
+      <SetUpMerchantVirtualPosResult xmlns:a="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model.Login" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <ResultCode xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">0</ResultCode>
+        <ResultMessage xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">Islem basarili</ResultMessage>
+        <a:MerchantNo>566286</a:MerchantNo>
+        <a:TerminalNo>491998</a:TerminalNo>
+      </SetUpMerchantVirtualPosResult>
+    </SetUpMerchantVirtualPosResponse>
+  </s:Body>
+</s:Envelope>

@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: Microsoft-IIS/10.0
+Content-Type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <CreateActionTokenResponse xmlns="http://www.sodexopayment.com/LoginService/2019/04">
+      <CreateActionTokenResult xmlns:a="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model.Login" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <ResultCode xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">0</ResultCode>
+        <ResultMessage xmlns="http://schemas.datacontract.org/2004/07/SodexoPayment.Common.Model">Islem basarili</ResultMessage>
+        <a:Token>B637437C978E91E1D8FC9D49A029F7D5A2FF6AE0</a:Token>
+      </CreateActionTokenResult>
+    </CreateActionTokenResponse>
+  </s:Body>
+</s:Envelope>
