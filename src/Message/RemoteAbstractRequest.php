@@ -116,8 +116,6 @@ abstract class RemoteAbstractRequest extends AbstractRequest
 
         $result = $this->callLoginService('CreateActionToken', 'actionTokenRequest', [
             'ActionType' => ActionType::SODEXO_PAYMENT,
-            'MerchantNo' => $this->getMerchantNo() ?: null,
-            'TerminalNo' => $this->getTerminalNo() ?: null,
         ], true);
 
         $this->assertResult($result, 'CreateActionToken');
@@ -260,6 +258,8 @@ abstract class RemoteAbstractRequest extends AbstractRequest
         array $fields,
         string $modelNamespace
     ): array {
+        $fields = Helper::orderFields($fields, Soap::FIELD_ORDER[$operation]);
+
         $body = Helper::buildSoapEnvelope($serviceNamespace, $operation, $parameterElement, $fields, $modelNamespace);
 
         $logger = $this->getLogger();

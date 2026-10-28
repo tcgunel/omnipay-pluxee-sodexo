@@ -73,13 +73,12 @@ class PurchaseRequest extends RemoteAbstractRequest
             'MerchantNo' => (string) $this->getMerchantNo(),
             'TerminalNo' => (string) $this->getTerminalNo(),
             'ExternalRrn' => $this->getExternalRrnValue(),
-            'ServiceId' => '',
             'Amount' => Helper::formatAmount($this->getAmount()),
         ];
 
         if ($this->requiresOtp()) {
             $paymentInfo['TxnCode'] = $this->getEncryptedOtp();
-            $paymentInfo['GSM'] = (string) Helper::normalizeGsm((string) $this->getGsm());
+            $paymentInfo['Gsm'] = (string) Helper::normalizeGsm((string) $this->getGsm());
         }
 
         if ($this->getRrn() !== null && $this->getRrn() !== '') {

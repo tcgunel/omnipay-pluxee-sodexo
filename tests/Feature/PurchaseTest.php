@@ -21,9 +21,9 @@ class PurchaseTest extends TestCase
         $this->assertSame('133938', $data['MerchantNo']);
         $this->assertSame('531098', $data['TerminalNo']);
         $this->assertSame('ORDER-12345', $data['ExternalRrn']);
-        $this->assertSame('', $data['ServiceId']);
+        $this->assertArrayNotHasKey('ServiceId', $data);
         $this->assertSame('25.00', $data['Amount']);
-        $this->assertSame('5551234567', $data['GSM']);
+        $this->assertSame('5551234567', $data['Gsm']);
         $this->assertArrayNotHasKey('Rrn', $data);
 
         // The OTP is RSA OAEP encrypted over UTF-16LE bytes and Base64 encoded.
@@ -38,7 +38,7 @@ class PurchaseTest extends TestCase
             'gsm' => '+90 555 123 45 67',
         ]));
 
-        $this->assertSame('5551234567', $request->getData()['GSM']);
+        $this->assertSame('5551234567', $request->getData()['Gsm']);
     }
 
     public function test_purchase_request_uses_transaction_id_as_external_rrn()
@@ -101,6 +101,12 @@ class PurchaseTest extends TestCase
         $paymentBody = $this->sentRequestBody(2);
 
         $this->assertStringContainsString('<ns:MakePayment>', $paymentBody);
+        $this->assertMatchesRegularExpression(
+            '#<ns:paymentInfo><sod:WsToken>[^<]+</sod:WsToken><sod:TxnType>OtpPayment</sod:TxnType><sod:TxnStatus>N</sod:TxnStatus>'
+            . '<sod:MerchantNo>[^<]*</sod:MerchantNo><sod:TerminalNo>[^<]*</sod:TerminalNo><sod:ExternalRrn>ORDER-12345</sod:ExternalRrn>'
+            . '<sod:TxnCode>[^<]+</sod:TxnCode><sod:Amount>25.00</sod:Amount><sod:Gsm>\d{10}</sod:Gsm></ns:paymentInfo>#',
+            $paymentBody
+        );
         $this->assertStringContainsString('<sod:WsToken>A532326B867D80D0C7EB8C38F918E6C491EE59DF</sod:WsToken>', $paymentBody);
         $this->assertStringContainsString('<sod:TxnCode>', $paymentBody);
         $this->assertStringContainsString('<sod:Amount>25.00</sod:Amount>', $paymentBody);

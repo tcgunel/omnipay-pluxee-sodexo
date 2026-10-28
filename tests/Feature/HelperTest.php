@@ -156,4 +156,20 @@ XML;
         $this->assertFalse(Helper::verifySignature('ORDER-12345', $signature, 'another-key'));
         $this->assertFalse(Helper::verifySignature('ORDER-99999', $signature, 'test-hmac-key'));
     }
+
+    public function test_order_fields_follows_the_contract()
+    {
+        $this->assertSame(
+            ['Password' => 'p', 'UserName' => 'u'],
+            Helper::orderFields(['UserName' => 'u', 'Password' => 'p'], ['Password', 'UserName'])
+        );
+    }
+
+    public function test_order_fields_rejects_a_field_outside_the_contract()
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('MerchantNo');
+
+        Helper::orderFields(['ActionType' => 'SodexoPayment', 'MerchantNo' => '1'], ['ActionType', 'WsToken']);
+    }
 }

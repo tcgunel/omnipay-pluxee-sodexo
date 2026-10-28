@@ -41,10 +41,11 @@ class CreateActionTokenTest extends TestCase
 
         $this->assertStringContainsString('<ns:CreateActionToken>', $body);
         $this->assertStringContainsString('<ns:actionTokenRequest>', $body);
-        $this->assertStringContainsString('<sod:ActionType>SodexoPayment</sod:ActionType>', $body);
-        $this->assertStringContainsString('<sod:WsToken>19835DD3E3A22D0F5579F4DD3153952326D4AD0B</sod:WsToken>', $body);
-        $this->assertStringContainsString('<sod:MerchantNo>133938</sod:MerchantNo>', $body);
-        $this->assertStringContainsString('<sod:TerminalNo>531098</sod:TerminalNo>', $body);
+        // CreateActionTokenRequest has no MerchantNo/TerminalNo members.
+        $this->assertStringContainsString(
+            '<ns:actionTokenRequest><sod:ActionType>SodexoPayment</sod:ActionType><sod:WsToken>19835DD3E3A22D0F5579F4DD3153952326D4AD0B</sod:WsToken></ns:actionTokenRequest>',
+            $body
+        );
     }
 
     public function test_sodexo_wallet_action_type_is_not_used()

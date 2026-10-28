@@ -5,6 +5,7 @@ namespace Omnipay\PluxeeSodexo\Helpers;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use LogicException;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\PluxeeSodexo\Exceptions\OmnipayPluxeeSodexoException;
@@ -56,6 +57,26 @@ class Helper
     public static function xmlEscape(string $value): string
     {
         return htmlspecialchars($value, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Put the fields in the contract's element order.
+     *
+     * @param  array<string, mixed>  $fields
+     * @param  array<int, string>  $order
+     * @return array<string, mixed>
+     *
+     * @throws LogicException when a field is not part of the contract
+     */
+    public static function orderFields(array $fields, array $order): array
+    {
+        $unknown = array_diff(array_keys($fields), $order);
+
+        if ($unknown !== []) {
+            throw new LogicException('Not part of the Pluxee contract: ' . implode(', ', $unknown));
+        }
+
+        return array_replace(array_intersect_key(array_flip($order), $fields), $fields);
     }
 
     /**

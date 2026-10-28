@@ -30,7 +30,7 @@ class VoidTest extends TestCase
         $this->assertSame('25.00', $data['Amount']);
         $this->assertSame('ORDER-VOID-1', $data['ExternalRrn']);
         $this->assertArrayNotHasKey('TxnCode', $data);
-        $this->assertArrayNotHasKey('GSM', $data);
+        $this->assertArrayNotHasKey('Gsm', $data);
     }
 
     public function test_void_requires_the_original_rrn()

@@ -13,7 +13,7 @@ use Omnipay\PluxeeSodexo\Constants\ActionType;
 class CreateActionTokenRequest extends RemoteAbstractRequest
 {
     /**
-     * @return array<string, string|null>
+     * @return array<string, string>
      *
      * @throws InvalidRequestException
      */
@@ -23,12 +23,6 @@ class CreateActionTokenRequest extends RemoteAbstractRequest
 
         return [
             'ActionType' => ActionType::SODEXO_PAYMENT,
-            'MerchantNo' => $this->getMerchantNo() !== null && $this->getMerchantNo() !== ''
-                ? (string) $this->getMerchantNo()
-                : null,
-            'TerminalNo' => $this->getTerminalNo() !== null && $this->getTerminalNo() !== ''
-                ? (string) $this->getTerminalNo()
-                : null,
         ];
     }
 

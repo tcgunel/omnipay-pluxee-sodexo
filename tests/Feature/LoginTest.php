@@ -42,8 +42,11 @@ class LoginTest extends TestCase
 
         $this->assertStringContainsString('<ns:LoginWsUser>', $body);
         $this->assertStringContainsString('<ns:wsUserInfo>', $body);
-        $this->assertStringContainsString('<sod:UserName>testuser</sod:UserName>', $body);
-        $this->assertStringContainsString('<sod:Password>testpassword</sod:Password>', $body);
+        // WCF reads WsUserInfo members in schema order: Password, then UserName.
+        $this->assertStringContainsString(
+            '<ns:wsUserInfo><sod:Password>testpassword</sod:Password><sod:UserName>testuser</sod:UserName></ns:wsUserInfo>',
+            $body
+        );
         $this->assertStringContainsString('xmlns:ns="http://www.sodexopayment.com/LoginService/2019/04"', $body);
 
         $request = $this->getMockedRequests()[0];
