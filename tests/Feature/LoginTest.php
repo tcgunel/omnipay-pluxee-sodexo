@@ -49,6 +49,7 @@ class LoginTest extends TestCase
         $request = $this->getMockedRequests()[0];
 
         $this->assertSame('text/xml; charset=utf-8', $request->getHeaderLine('Content-Type'));
+        $this->assertSame('"http://www.sodexopayment.com/LoginService/2019/04/ILoginWS/LoginWsUser"', $request->getHeaderLine('SOAPAction'));
         $this->assertStringContainsString('uat.pluxee.com.tr/LoginWS.svc', (string) $request->getUri());
     }
 

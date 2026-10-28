@@ -105,6 +105,15 @@ class PurchaseTest extends TestCase
         $this->assertStringContainsString('<sod:TxnCode>', $paymentBody);
         $this->assertStringContainsString('<sod:Amount>25.00</sod:Amount>', $paymentBody);
         $this->assertStringContainsString('<sod:ExternalRrn>ORDER-12345</sod:ExternalRrn>', $paymentBody);
+
+        $this->assertSame(
+            [
+                '"http://www.sodexopayment.com/LoginService/2019/04/ILoginWS/LoginWsUser"',
+                '"http://www.sodexopayment.com/LoginService/2019/04/ILoginWS/CreateActionToken"',
+                '"http://www.sodexopayment.com/PaymentService/2019/04/IPaymentWS/MakePayment"',
+            ],
+            array_map(fn ($request) => $request->getHeaderLine('SOAPAction'), $this->getMockedRequests())
+        );
     }
 
     public function test_purchase_failure_returns_a_failed_response()

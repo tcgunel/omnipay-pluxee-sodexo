@@ -153,6 +153,7 @@ abstract class RemoteAbstractRequest extends AbstractRequest
             $result = $this->sendSoap(
                 $this->getPaymentEndpoint(),
                 Soap::PAYMENT_SERVICE_NAMESPACE,
+                Soap::PAYMENT_CONTRACT,
                 $operation,
                 $parameterElement,
                 $fields,
@@ -219,6 +220,7 @@ abstract class RemoteAbstractRequest extends AbstractRequest
             $result = $this->sendSoap(
                 $this->getLoginEndpoint(),
                 Soap::LOGIN_SERVICE_NAMESPACE,
+                Soap::LOGIN_CONTRACT,
                 $operation,
                 $parameterElement,
                 $fields,
@@ -252,6 +254,7 @@ abstract class RemoteAbstractRequest extends AbstractRequest
     protected function sendSoap(
         string $endpoint,
         string $serviceNamespace,
+        string $contract,
         string $operation,
         string $parameterElement,
         array $fields,
@@ -272,6 +275,7 @@ abstract class RemoteAbstractRequest extends AbstractRequest
                 $endpoint,
                 [
                     'Content-Type' => 'text/xml; charset=utf-8',
+                    'SOAPAction' => '"' . Soap::action($serviceNamespace, $contract, $operation) . '"',
                 ],
                 $body
             );
